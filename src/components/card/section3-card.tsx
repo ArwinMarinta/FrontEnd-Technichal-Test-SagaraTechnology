@@ -17,7 +17,7 @@ const SectionCard: React.FC<SectionCardProps> = ({ item }) => {
           src={item.icon}
           alt="..."
           loading="lazy"
-          className="p-3 bg-RED02 w-20 rounded-xl "
+          className="p-3 bg-RED02 lg:w-20 rounded-xl w-32"
         />
       </div>
       <div className="ml-6">

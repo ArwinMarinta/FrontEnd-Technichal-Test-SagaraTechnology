@@ -1,14 +1,48 @@
-import React from "react";
+import { useState } from "react";
 import UploadIcon from "../../assets/upload.svg";
+import { studentType } from "../../types/student";
+import {
+  addStudentToLocalStorage,
+  editStudentInLocalStorage,
+  getStudentsFromLocalStorage,
+} from "../../utils/localStorage";
 
 interface StudentModalProps {
   modal: boolean;
   setModal: React.Dispatch<React.SetStateAction<boolean>>;
+  studentToEdit?: studentType;
   message: string;
+  isEditing: boolean;
 }
 
-const StudentModal: React.FC<StudentModalProps> = ({ modal, setModal, message }) => {
-  if (!modal) return null; // Jangan render modal jika modal state-nya false
+const StudentModal: React.FC<StudentModalProps> = ({
+  modal,
+  setModal,
+  message,
+  isEditing,
+}) => {
+  if (!modal) return null;
+
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const [newStudent, setNewStudent] = useState<studentType>({
+    id: 0,
+    Profile: "https://randomuser.me/api/portraits/men/5.jpg",
+    FullName: "",
+    EmailAddress: "",
+    PhoneNumber: "",
+    Instance: "",
+    CreatedAt: "",
+  });
+
+  const handleSave = () => {
+    if (isEditing) {
+      editStudentInLocalStorage(newStudent);
+    } else {
+      const id = Math.max(0, ...getStudentsFromLocalStorage().map((s) => s.id)) + 1;
+      addStudentToLocalStorage({ ...newStudent, id });
+    }
+    setModal(false);
+  };
 
   return (
     <>
@@ -58,18 +92,26 @@ const StudentModal: React.FC<StudentModalProps> = ({ modal, setModal, message })
                     <label className="font-bold">Full Name</label>
                     <input
                       type="text"
-                      className="bg-white border mt-2 border-GRAY10 text-[#9E9E9E] font-medium text-sm rounded-[5px] focus:ring-RED01 focus:border-RED01 block w-full px-2 py-2"
+                      className="bg-white border mt-2 border-GRAY10  font-medium text-sm rounded-[5px] focus:ring-RED01 focus:border-RED01 block w-full px-2 py-2"
                       placeholder="Jhon"
                       required
+                      value={newStudent.FullName}
+                      onChange={(e) =>
+                        setNewStudent({ ...newStudent, FullName: e.target.value })
+                      }
                     />
                   </div>
                   <div className="flex flex-col w-full">
                     <label className="font-bold">Email</label>
                     <input
-                      type="text"
-                      className="bg-white border mt-2 border-GRAY10 text-[#9E9E9E] font-medium text-sm rounded-[5px] focus:ring-RED01 focus:border-RED01 block w-full px-2 py-2"
+                      type="email"
+                      className="bg-white border mt-2 border-GRAY10  font-medium text-sm rounded-[5px] focus:ring-RED01 focus:border-RED01 block w-full px-2 py-2"
                       placeholder="jhondoe@gmail.com"
                       required
+                      value={newStudent.EmailAddress}
+                      onChange={(e) =>
+                        setNewStudent({ ...newStudent, EmailAddress: e.target.value })
+                      }
                     />
                   </div>
                 </section>
@@ -81,18 +123,26 @@ const StudentModal: React.FC<StudentModalProps> = ({ modal, setModal, message })
                     <label className="font-bold">Phone Number</label>
                     <input
                       type="text"
-                      className="bg-white border mt-2 border-GRAY10 text-[#9E9E9E] font-medium text-sm rounded-[5px] focus:ring-RED01 focus:border-RED01 block w-full px-2 py-2"
+                      className="bg-white border mt-2 border-GRAY10  font-medium text-sm rounded-[5px] focus:ring-RED01 focus:border-RED01 block w-full px-2 py-2"
                       placeholder="+62 8453875329"
                       required
+                      value={newStudent.PhoneNumber}
+                      onChange={(e) =>
+                        setNewStudent({ ...newStudent, PhoneNumber: e.target.value })
+                      }
                     />
                   </div>
                   <div className="flex flex-col w-full">
                     <label className="font-bold">Instance</label>
                     <input
                       type="text"
-                      className="bg-white border mt-2 border-GRAY10 text-[#9E9E9E] font-medium text-sm rounded-[5px] focus:ring-RED01 focus:border-RED01 block w-full px-2 py-2"
+                      className="bg-white border mt-2 border-GRAY10  font-medium text-sm rounded-[5px] focus:ring-RED01 focus:border-RED01 block w-full px-2 py-2"
                       placeholder="Instance"
                       required
+                      value={newStudent.Instance}
+                      onChange={(e) =>
+                        setNewStudent({ ...newStudent, Instance: e.target.value })
+                      }
                     />
                   </div>
                 </section>
@@ -103,16 +153,20 @@ const StudentModal: React.FC<StudentModalProps> = ({ modal, setModal, message })
                   <div className="flex flex-col w-full">
                     <label className="font-bold">Password</label>
                     <input
-                      type="text"
+                      type="password"
                       className="bg-white border mt-2 border-GRAY10 text-[#9E9E9E] font-medium text-sm rounded-[5px] focus:ring-RED01 focus:border-RED01 block w-full px-2 py-2"
                       placeholder="Password"
                       required
+                      // value={newStudent}
+                      // onChange={(e) =>
+                      //   setNewStudent({ ...newStudent, EmailAddress: e.target.value })
+                      // }
                     />
                   </div>
                   <div className="flex flex-col w-full">
                     <label className="font-bold">Re-type password</label>
                     <input
-                      type="text"
+                      type="password"
                       className="bg-white border mt-2 border-GRAY10 text-[#9E9E9E] font-medium text-sm rounded-[5px] focus:ring-RED01 focus:border-RED01 block w-full px-2 py-2"
                       placeholder="Re-type password"
                       required
@@ -138,7 +192,7 @@ const StudentModal: React.FC<StudentModalProps> = ({ modal, setModal, message })
 
             <div className="flex items-center justify-end p-4 md:p-4 border-t border-GRAY10 rounded-b">
               <button
-                onClick={() => setModal(false)}
+                onClick={handleSave}
                 type="button"
                 className="text-white bg-RED01  focus:ring-4 focus:outline-none  font-bold rounded-lg text-sm px-5 py-2.5 text-center "
               >
