@@ -6,4 +6,5 @@ export type studentType = {
   PhoneNumber: string;
   Instance: string;
   CreatedAt: string;
+  Password: string;
 };

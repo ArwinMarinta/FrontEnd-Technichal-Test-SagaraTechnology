@@ -6,7 +6,8 @@
     "EmailAddress": "john.doe@example.com",
     "PhoneNumber": "+1 (555) 123-4567",
     "Instance": "Company A",
-    "CreatedAt": "Tuesday, November 23, 2024"
+    "CreatedAt": "Tuesday, November 23, 2024",
+    "Password": "password123"
   },
   {
     "id": 2,
@@ -15,7 +16,8 @@
     "EmailAddress": "jane.smith@example.com",
     "PhoneNumber": "+1 (555) 234-5678",
     "Instance": "Company B",
-    "CreatedAt": "Tuesday, November 23, 2024"
+    "CreatedAt": "Tuesday, November 23, 2024",
+    "Password": "password123"
   },
   {
     "id": 3,
@@ -24,7 +26,8 @@
     "EmailAddress": "michael.johnson@example.com",
     "PhoneNumber": "+1 (555) 345-6789",
     "Instance": "Company C",
-    "CreatedAt": "Tuesday, November 23, 2024"
+    "CreatedAt": "Tuesday, November 23, 2024",
+    "Password": "password123"
   },
   {
     "id": 4,
@@ -33,7 +36,8 @@
     "EmailAddress": "emily.davis@example.com",
     "PhoneNumber": "+1 (555) 456-7890",
     "Instance": "Company D",
-    "CreatedAt": "Tuesday, November 23, 2024"
+    "CreatedAt": "Tuesday, November 23, 2024",
+    "Password": "password123"
   },
   {
     "id": 5,
@@ -42,7 +46,8 @@
     "EmailAddress": "david.brown@example.com",
     "PhoneNumber": "+1 (555) 567-8901",
     "Instance": "Company E",
-    "CreatedAt": "Tuesday, November 23, 2024"
+    "CreatedAt": "Tuesday, November 23, 2024",
+    "Password": "password123"
   },
   {
     "id": 6,
@@ -51,7 +56,8 @@
     "EmailAddress": "sophia.wilson@example.com",
     "PhoneNumber": "+1 (555) 678-9012",
     "Instance": "Company F",
-    "CreatedAt": "Tuesday, November 23, 2024"
+    "CreatedAt": "Tuesday, November 23, 2024",
+    "Password": "password123"
   },
   {
     "id": 7,
@@ -60,7 +66,8 @@
     "EmailAddress": "james.miller@example.com",
     "PhoneNumber": "+1 (555) 789-0123",
     "Instance": "Company G",
-    "CreatedAt": "Tuesday, November 23, 2024"
+    "CreatedAt": "Tuesday, November 23, 2024",
+    "Password": "password123"
   },
   {
     "id": 8,
@@ -69,7 +76,8 @@
     "EmailAddress": "olivia.anderson@example.com",
     "PhoneNumber": "+1 (555) 890-1234",
     "Instance": "Company H",
-    "CreatedAt": "Tuesday, November 23, 2024"
+    "CreatedAt": "Tuesday, November 23, 2024",
+    "Password": "password123"
   },
   {
     "id": 9,
@@ -78,7 +86,8 @@
     "EmailAddress": "robert.taylor@example.com",
     "PhoneNumber": "+1 (555) 901-2345",
     "Instance": "Company I",
-    "CreatedAt": "Tuesday, November 23, 2024"
+    "CreatedAt": "Tuesday, November 23, 2024",
+    "Password": "password123"
   },
   {
     "id": 10,
@@ -87,6 +96,7 @@
     "EmailAddress": "isabella.martinez@example.com",
     "PhoneNumber": "+1 (555) 012-3456",
     "Instance": "Company J",
-    "CreatedAt": "Tuesday, November 23, 2024"
+    "CreatedAt": "Tuesday, November 23, 2024",
+    "Password": "password123"
   }
 ]

@@ -26,8 +26,12 @@ const Students = () => {
   const [searchQuery, setSearchQuery] = useState<string>("");
   const { activeModal, handleOpenModal, handleCloseModal } = useModal();
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const totalPages = 10; // Example total pages
-  const [isEditing, setIsEditing] = useState(false);
+  const totalPages = 7; // Example total pages
+  const [typeEditing, setTypeEditing] = useState<string>("");
+  const [idUser, setIdUser] = useState<number | null>(null);
+
+  // console.log(idUser);
+  console.log(typeEditing);
 
   const handlePageChange = (page: number) => {
     if (page < 1 || page > totalPages) return;
@@ -38,10 +42,12 @@ const Students = () => {
     if (type === "add") {
       setTypeModal("Add New Student ");
       handleOpenModal(true, null);
+      setTypeEditing("add");
     } else if (type === "edit") {
-      setIsEditing(true);
+      setIdUser(userId);
       setTypeModal("Edit Data Student");
       handleOpenModal(true, userId);
+      setTypeEditing("edit");
     }
   };
 
@@ -62,6 +68,11 @@ const Students = () => {
   const handleDelete = (id: number) => {
     deleteStudentFromLocalStorage(id);
     setStudents((prevStudents) => prevStudents.filter((student) => student.id !== id));
+  };
+
+  const refreshStudents = () => {
+    const updatedStudents = getStudentsFromLocalStorage();
+    setStudents(updatedStudents);
   };
 
   return (
@@ -100,7 +111,9 @@ const Students = () => {
                     modal={activeModal}
                     setModal={handleCloseModal}
                     message={typeModal}
-                    isEditing={isEditing}
+                    isEditing={typeEditing}
+                    onSave={refreshStudents}
+                    id={idUser}
                   />
                 </div>
                 <div className="flex flex-row gap-2 mt-5 lg:mt-0">
@@ -128,9 +141,9 @@ const Students = () => {
               <section id="section-3" className="mt-8">
                 <div className=" overflow-x-auto w-full">
                   <table className="w-full text-sm text-left rtl:text-right rounded-lg border">
-                    <thead className="text-xs  text-GRAY11 bg-WHITE02 border-b-[1px] ">
+                    <thead className="text-xs  text-GRAY11 bg-WHITE02 border-b-[1px]">
                       <tr>
-                        <th scope="col" className="px-2 py-4 rou">
+                        <th scope="col" className="px-2 pl-4 py-4 ]">
                           Profile
                         </th>
                         <th scope="col" className="px-2 py-4">
@@ -148,7 +161,7 @@ const Students = () => {
                         <th scope="col" className="px-2 py-3">
                           Created At
                         </th>
-                        <th scope="col" className="px-2 py-3">
+                        <th scope="col" className="px-2 pr-4 py-3">
                           Action
                         </th>
                       </tr>
@@ -156,7 +169,7 @@ const Students = () => {
                     <tbody>
                       {filteredStudents.map((data) => (
                         <tr key={data.id} className="bg-white border-b">
-                          <td className="px-6 py-4">
+                          <td className="px-2 pl-4 py-4">
                             <img
                               src={data.Profile}
                               alt="student"
@@ -169,7 +182,7 @@ const Students = () => {
                           <td className="px-2 py-4">{data["PhoneNumber"]}</td>
                           <td className="px-2 py-4">{data["Instance"]}</td>
                           <td className="px-2 py-4">{data["CreatedAt"]}</td>
-                          <td className="px-2 py-4  whitespace-nowrap">
+                          <td className="px-2 pr-4 py-4  whitespace-nowrap">
                             <div className="flex flex-row gap-3 h-full items-center">
                               <button
                                 onClick={() => handleDelete(data.id)}
@@ -178,7 +191,7 @@ const Students = () => {
                                 <img src={DeleteIcon} alt="Delete" loading="lazy" />
                               </button>
                               <button onClick={() => handleModal(data.id, "edit")}>
-                                <img src={EditeIcon} alt="Delete" loading="lazy" />
+                                <img src={EditeIcon} alt="edite" loading="lazy" />
                               </button>
                             </div>
                           </td>
@@ -191,19 +204,6 @@ const Students = () => {
                     currentPage={currentPage}
                     onPageChange={handlePageChange}
                   />
-                  {/* <div className="bg-white py-4 flex flex-row justify-between border-b border-l border-r px-6">
-                    <div>
-                      <button className="border py-2 px-4 font-medium rounded-[4px] shadow border-GRAY04 hover:bg-RED01 hover:text-white">
-                        Previous
-                      </button>
-                    </div>
-                    <div>kiri</div>
-                    <div>
-                      <button className="border py-2 px-4 font-medium rounded-[4px] shadow border-GRAY04 hover:bg-RED01 hover:text-white">
-                        Next
-                      </button>
-                    </div>
-                  </div> */}
                 </div>
               </section>
             </div>

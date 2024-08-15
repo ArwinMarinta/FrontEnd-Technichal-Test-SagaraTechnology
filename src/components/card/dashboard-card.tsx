@@ -9,7 +9,7 @@ interface DashboardProps {
 
 const DashboardCard: React.FC<DashboardProps> = ({ item }) => {
   return (
-    <div className="bg-white shadow-sm p-6 flex flex-row justify-between rounded-[4px] border-[1px] border-GRAY04">
+    <div className="bg-white shadow-sm md:p-6 p-10 flex flex-row justify-between rounded-[4px] border-[1px] border-GRAY04">
       <div className="flex flex-col gap-8">
         <h1 className="text-base font-bold text-GRAY05">{item.type}</h1>
         <span className="font-bold text-2xl">{item.total}</span>
@@ -20,7 +20,7 @@ const DashboardCard: React.FC<DashboardProps> = ({ item }) => {
           </span>
         </span>
       </div>
-      <div>
+      <div className="px-2">
         <img src={item.icon} alt=".." loading="lazy" />
       </div>
     </div>

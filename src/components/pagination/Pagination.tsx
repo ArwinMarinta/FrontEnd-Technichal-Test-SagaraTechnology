@@ -11,7 +11,6 @@ const Pagination: React.FC<PaginationProps> = ({
   currentPage,
   onPageChange,
 }) => {
-  // const [pageRange, setPageRange] = useState(7); // Number of pages to show before and after the current page
   const pageRange = 7;
   const getPaginationRange = () => {
     const range = [];
@@ -34,7 +33,7 @@ const Pagination: React.FC<PaginationProps> = ({
   };
 
   return (
-    <div className="bg-white py-4 flex flex-row justify-between border-b border-l border-r px-6">
+    <div className="bg-white py-4 flex flex-row justify-between border-b border-l border-r px-6 w-full">
       <div>
         <button
           onClick={() => onPageChange(currentPage - 1)}
@@ -53,7 +52,7 @@ const Pagination: React.FC<PaginationProps> = ({
                 onPageChange(page);
               }
             }}
-            className={` py-2 px-4 font-medium rounded-[4px]  ${
+            className={`py-2 px-4 font-medium rounded-[4px] ${
               page === currentPage
                 ? "bg-RED01 text-white"
                 : "hover:bg-RED01 hover:text-white"
@@ -77,5 +76,3 @@ const Pagination: React.FC<PaginationProps> = ({
 };
 
 export default Pagination;
-
-// Usage Exampl

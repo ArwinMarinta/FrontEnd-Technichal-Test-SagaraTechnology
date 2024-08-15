@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import UploadIcon from "../../assets/upload.svg";
 import { studentType } from "../../types/student";
 import {
@@ -12,7 +12,9 @@ interface StudentModalProps {
   setModal: React.Dispatch<React.SetStateAction<boolean>>;
   studentToEdit?: studentType;
   message: string;
-  isEditing: boolean;
+  isEditing: string;
+  onSave: () => void;
+  id: number | null;
 }
 
 const StudentModal: React.FC<StudentModalProps> = ({
@@ -20,6 +22,8 @@ const StudentModal: React.FC<StudentModalProps> = ({
   setModal,
   message,
   isEditing,
+  onSave,
+  id,
 }) => {
   if (!modal) return null;
 
@@ -31,15 +35,38 @@ const StudentModal: React.FC<StudentModalProps> = ({
     EmailAddress: "",
     PhoneNumber: "",
     Instance: "",
-    CreatedAt: "",
+    CreatedAt: "Tuesday, November 23, 2024",
+    Password: "",
   });
 
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  useEffect(() => {
+    if (isEditing === "edit" && id !== null) {
+      // Ambil data dari localStorage berdasarkan id
+      const students = getStudentsFromLocalStorage();
+      const studentToEdit = students.find((student) => student.id === id);
+      if (studentToEdit) {
+        // Set data yang ditemukan ke newStudent
+        setNewStudent(studentToEdit);
+      }
+    }
+  }, [isEditing, id]);
+
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const [confPassword, setConfPassword] = useState<string>("");
+
   const handleSave = () => {
-    if (isEditing) {
+    if (isEditing === "edit" && id != null) {
       editStudentInLocalStorage(newStudent);
+      onSave();
     } else {
       const id = Math.max(0, ...getStudentsFromLocalStorage().map((s) => s.id)) + 1;
-      addStudentToLocalStorage({ ...newStudent, id });
+      if (newStudent.Password === confPassword) {
+        addStudentToLocalStorage({ ...newStudent, id });
+        onSave();
+      } else {
+        alert("Password dan Confirm Password Beda");
+      }
     }
     setModal(false);
   };
@@ -157,10 +184,10 @@ const StudentModal: React.FC<StudentModalProps> = ({
                       className="bg-white border mt-2 border-GRAY10 text-[#9E9E9E] font-medium text-sm rounded-[5px] focus:ring-RED01 focus:border-RED01 block w-full px-2 py-2"
                       placeholder="Password"
                       required
-                      // value={newStudent}
-                      // onChange={(e) =>
-                      //   setNewStudent({ ...newStudent, EmailAddress: e.target.value })
-                      // }
+                      value={newStudent.Password}
+                      onChange={(e) =>
+                        setNewStudent({ ...newStudent, Password: e.target.value })
+                      }
                     />
                   </div>
                   <div className="flex flex-col w-full">
@@ -170,6 +197,8 @@ const StudentModal: React.FC<StudentModalProps> = ({
                       className="bg-white border mt-2 border-GRAY10 text-[#9E9E9E] font-medium text-sm rounded-[5px] focus:ring-RED01 focus:border-RED01 block w-full px-2 py-2"
                       placeholder="Re-type password"
                       required
+                      value={confPassword}
+                      onChange={(e) => setConfPassword(e.target.value)}
                     />
                   </div>
                 </section>

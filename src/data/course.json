@@ -1,0 +1,22 @@
+[
+  {
+    "id": 1,
+    "name": "Back End",
+    "total": 289
+  },
+  {
+    "id": 2,
+    "name": "Front End",
+    "total": 250
+  },
+  {
+    "id": 3,
+    "name": "UI/EX",
+    "total": 320
+  },
+  {
+    "id": 4,
+    "name": "Quality Assurance",
+    "total": 200
+  }
+]
