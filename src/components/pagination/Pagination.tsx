@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 interface PaginationProps {
   totalPages: number;
@@ -11,8 +11,8 @@ const Pagination: React.FC<PaginationProps> = ({
   currentPage,
   onPageChange,
 }) => {
-  const [pageRange, setPageRange] = useState(7); // Number of pages to show before and after the current page
-
+  // const [pageRange, setPageRange] = useState(7); // Number of pages to show before and after the current page
+  const pageRange = 7;
   const getPaginationRange = () => {
     const range = [];
     const start = Math.max(currentPage - pageRange, 1);

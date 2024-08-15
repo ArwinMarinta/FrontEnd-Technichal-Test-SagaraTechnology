@@ -1,4 +1,3 @@
-import React from "react";
 import Icon1 from "../../assets/landing-page/section-4/icon-1.svg";
 import Icon2 from "../../assets/landing-page/section-4/icon-2.svg";
 import Icon3 from "../../assets/landing-page/section-4/icon-3.svg";

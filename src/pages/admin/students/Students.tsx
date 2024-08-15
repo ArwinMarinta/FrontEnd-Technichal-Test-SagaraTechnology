@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import Sidebar from "../../../components/navigation/sidebar/Sidebar";
 import NavAdmin from "../../../components/navigation/navbar/NavAdmin";
 import FilterIcon from "../../../assets/dashboard/filter.svg";
